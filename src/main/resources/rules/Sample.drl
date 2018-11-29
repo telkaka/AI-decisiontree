@@ -1,11 +1,14 @@
 package com.sample
  
 import com.sample.DroolsTest.Message;
+import com.sample.DroolsTest.Question;
  
 rule "Hello World"
     when
         m : Message( status == Message.HELLO, myMessage : message )
     then
+    	Question q = new Question(new String[] {"whats the answer?" ,"a","b","c"});
+    	q.Answer();
         System.out.println( myMessage );
         m.setMessage( "Goodbye cruel world" );
         m.setStatus( Message.GOODBYE );
