@@ -7,8 +7,52 @@ rule "Hello World"
     when
         m : Message( status == Message.HELLO, myMessage : message )
     then
-    	Question q = new Question(new String[] {"whats the answer?" ,"a","b","c"});
-    	q.Answer();
+    	// TODO
+    	// powiązać odpowiedz z kolejnym pytaniem
+    	//
+    	String pick = new String("Pick the next question:");
+    	Question q1 = new Question(new String[] {"What type of movie do they feel like watching?",
+    					"Take us on an adventure!","We love to laugh!", "We're big sports fans!",
+    					"We have a soft spot for animation!", "We like to sing and dance!",
+    					"We're animal lovers!", "We want to be wowed!"});
+    	Question q2 = new Question(new String[] {"Do you enjoy hearing your kids sing the same song over and over?",
+    					"A little variety would be nice","Yes"});
+    	Question q3 = new Question(new String[] {"How about pixar?",
+    					"No, Disney classic", "Yes", "No, and not Disney either"});
+    	Question q4 = new Question(new String[] {"Would you enjoy a Don Bluth classic?","Yes","Double yes!"});
+    	Question q5 = new Question(new String[] {"Did Star Command send you on a mission?",
+    					"No, The old guy with balloons did", "Yes"});
+    	Question q6 = new Question(new String[] {"Would you like cute mice to save the day?","Yes","No"});
+    	Question q7 = new Question(new String[] {"Are the hills alive?",
+    					"No, but lions and scarecrows seem to be", "Yes"});
+    	Question q8 = new Question(new String[] {"Is it the holidays?","Halloween counts!","Yes"});
+    	Question q9 = new Question(new String[] {"Do you feel like crying?","Yes","Only if it has a happy ending",
+    					"Only if It's at the beginning and I have plenty of time to recover", "No"});
+    	Question q10 = new Question(new String[] {"Do They like magic?","Yes","Kinda, but They want more action"});
+    	Question q11 = new Question(new String[] {"I want to show them one of the greatest movies ever made","",""});
+    	Question q12 = new Question(new String[] {"Is good dialogue a must?","Yes","No"});
+    	Question q13 = new Question(new String[] {"What's your sport of choice?","Football","Hockey",
+    					"Baseball","Basketball"});
+    	Question q14 = new Question(new String[] {"Wants to take a 'feels' trip?","Yes","No, let's keep it light"});
+    	Question q15 = new Question(new String[] {"Interested in a true story?","Yes","Nope, just truly awesome"});
+    	Question q16 = new Question(new String[] {"Are there rules that say a dog can't play basketball?","Yes","No"});
+    	Question q17 = new Question(new String[] {"What's your family's sense of humor?","Served with a side of values",
+    					"Dark","Bright & cheery"});
+    	Question q18 = new Question(new String[] {"Macaulay Culkin: co-starring or headline?",
+    					"Supporting role", "Star of the show"});
+    	Question q19 = new Question(new String[] {"The more bad jokes the better?","Yes","We'd like a bit of slapstick"});
+    	Question q20 = new Question(new String[] {"Do you speak squirrel?","Yes","We're still learning"});
+    	Question q21 = new Question(new String[] {"Can they handle action scenes?","No","Yes"});
+    	Question q22 = new Question(new String[] {"In the mood for some time travel?",
+    					"Yes","We prefer alternate worlds", "Only if It's chronogical"});
+    	Question q23 = new Question(new String[] {"Do your kids like Looney Tunes?",
+    					"Yes","Sure, but They'd like to see something different, too"});
+    	Question q24 = new Question(new String[] {"Are they easily spooked?","Yes","They can takie it"});
+    	// start with q1
+    	q1.setStatus(Question.AVAILABLE);
+    	insert(q1);
+    	
+    	
         System.out.println( myMessage );
         m.setMessage( "Goodbye cruel world" );
         m.setStatus( Message.GOODBYE );
@@ -20,4 +64,11 @@ rule "GoodBye"
         Message( status == Message.GOODBYE, myMessage : message )
     then
         System.out.println( myMessage );
+end
+
+rule "AskQuestion"
+	when
+		q : Question( status == Question.AVAILABLE)
+	then
+		q.Ask();
 end

@@ -83,13 +83,14 @@ public class DroolsTest {
     		try {
 	    		this.setContent(args[0]);
 	    		this.setAnswers(Arrays.copyOfRange(args, 1, args.length));
+	    		this.setStatus(UNAVAILABLE);
     		}
     		catch(ArrayIndexOutOfBoundsException exception) {
     			LOGGER.log(Level.FINE, "Not enough arguments in Question()", exception);
     		}
     	}
     	
-    	public void Answer() {
+    	public void Ask() {
     		// todo
     		// request answer from input, print the pick and change state
     		System.out.println(this.getContent());
