@@ -1,69 +1,518 @@
 package com.sample
  
-import com.sample.DroolsTest.Message;
+
 import com.sample.DroolsTest.Question;
- 
-rule "Hello World"
-    when
-        m : Message( status == Message.HELLO, myMessage : message )
-    then
-    	// TODO
-    	// powiązać odpowiedz z kolejnym pytaniem
-    	//
-    	String pick = new String("Pick the next question:");
-    	Question q1 = new Question(new String[] {"What type of movie do they feel like watching?",
+
+rule "Init"
+	when
+	then
+	 	Question question = new Question(new String[] {"What type of movie do they feel like watching?",
     					"Take us on an adventure!","We love to laugh!", "We're big sports fans!",
     					"We have a soft spot for animation!", "We like to sing and dance!",
     					"We're animal lovers!", "We want to be wowed!"});
-    	Question q2 = new Question(new String[] {"Do you enjoy hearing your kids sing the same song over and over?",
-    					"A little variety would be nice","Yes"});
-    	Question q3 = new Question(new String[] {"How about pixar?",
-    					"No, Disney classic", "Yes", "No, and not Disney either"});
-    	Question q4 = new Question(new String[] {"Would you enjoy a Don Bluth classic?","Yes","Double yes!"});
-    	Question q5 = new Question(new String[] {"Did Star Command send you on a mission?",
-    					"No, The old guy with balloons did", "Yes"});
-    	Question q6 = new Question(new String[] {"Would you like cute mice to save the day?","Yes","No"});
-    	Question q7 = new Question(new String[] {"Are the hills alive?",
-    					"No, but lions and scarecrows seem to be", "Yes"});
-    	Question q8 = new Question(new String[] {"Is it the holidays?","Halloween counts!","Yes"});
-    	Question q9 = new Question(new String[] {"Do you feel like crying?","Yes","Only if it has a happy ending",
-    					"Only if It's at the beginning and I have plenty of time to recover", "No"});
-    	Question q10 = new Question(new String[] {"Do They like magic?","Yes","Kinda, but They want more action"});
-    	Question q11 = new Question(new String[] {"I want to show them one of the greatest movies ever made","",""});
-    	Question q12 = new Question(new String[] {"Is good dialogue a must?","Yes","No"});
-    	Question q13 = new Question(new String[] {"What's your sport of choice?","Football","Hockey",
-    					"Baseball","Basketball"});
-    	Question q14 = new Question(new String[] {"Wants to take a 'feels' trip?","Yes","No, let's keep it light"});
-    	Question q15 = new Question(new String[] {"Interested in a true story?","Yes","Nope, just truly awesome"});
-    	Question q16 = new Question(new String[] {"Are there rules that say a dog can't play basketball?","Yes","No"});
-    	Question q17 = new Question(new String[] {"What's your family's sense of humor?","Served with a side of values",
-    					"Dark","Bright & cheery"});
-    	Question q18 = new Question(new String[] {"Macaulay Culkin: co-starring or headline?",
-    					"Supporting role", "Star of the show"});
-    	Question q19 = new Question(new String[] {"The more bad jokes the better?","Yes","We'd like a bit of slapstick"});
-    	Question q20 = new Question(new String[] {"Do you speak squirrel?","Yes","We're still learning"});
-    	Question q21 = new Question(new String[] {"Can they handle action scenes?","No","Yes"});
-    	Question q22 = new Question(new String[] {"In the mood for some time travel?",
+    	// zadaj pytanie
+    	insert(question);
+end
+
+rule "type - adventure"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "Take us on an adventure!")
+	then
+		newQuestion = new Question(new String[] {"Can they handle action scenes?","No","Yes"});
+		newQuestion2 = new Question(new String[] {"In the mood for some time travel?",
     					"Yes","We prefer alternate worlds", "Only if It's chronogical"});
-    	Question q23 = new Question(new String[] {"Do your kids like Looney Tunes?",
-    					"Yes","Sure, but They'd like to see something different, too"});
-    	Question q24 = new Question(new String[] {"Are they easily spooked?","Yes","They can takie it"});
-    	// start with q1
-    	q1.setStatus(Question.AVAILABLE);
+		insert(newQuestion);
+		insert(newQuestion2);
+end
+
+rule "type - laugh"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "We love to lough!")
+	then
+		newQuestion = new Question(new String[] {"What's your family's sense of humor?",
+							"Served with a side of values","Dark","Bright & cheery"});
+end
+
+rule "type - sports"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "We're big sports fans!")
+	then
+		newQuestion = new Question(new String[] {"What's your sport of choice?",
+						"Football","Hockey","Baseball","Basketball"});
+end
+
+rule "type - animation"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "We have a soft spot for animation!")
+	then
+		newQuestion = new Question(new String[] {"How about Pixar?",
+    					"No, Disney classic", "Yes", "No, and not Disney either"});
+    	newQuestion2 = new Question(new String[] {"Do you enjoy hearing your kids sing the same song over and over?",
+    					"A little variety would be nice","Yes"});
+    	insert(newQuestion);
+    	insert(newQuestion2);
+end
+
+rule "type - dance"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "We like to sing and dance!)
+	then
+		newQuestion = new Question(new String[] {"Are the hills alive?",
+    					"No, but lions and scarecrows seem to be", "Yes"});
+    	newQuestion2 = new Question(new String[] {"Is it the holidays?",
+    					"Halloween counts!","Yes"});
+    	insert(newQuestion);
+    	insert(newQuestion2);
+end
+
+rule "type - animals"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "We're animal lovers!")
+	then
+		newQuestion = new Question(new String[] {"Do you feel like crying?",
+						"Yes", "Only if it has a happy ending",
+    					"Only if It's at the beginning and I have plenty of time to recover", "No"});
+		insert(newQuestion);
+end
+
+rule "type - wow"
+	when
+		question : Question(content == "What type of movie do they feel like watching?",
+							chosen == "We want to be wowed!")
+	then
+		// tutaj jest pojebany diagram
+		newQuestion = new Question(new String[] {"Do They like magic?","Yes","Kinda, but They want more action"});
+    	newQuestion2 = new Question(new String[] {"I want to show them one of the greatest movies ever made","",""});
+end
+
+rule "action - no"
+	when
+		question : Question(content == "Can they handle action scenes?", chosen == "No")
+	then
+		// result - Wall-E
+		
+end
+
+rule "action - yes"
+	when
+		question : Question(content == "Can they handle action scenes?", chosen == "Yes")
+	then
+		newQuestion = new Question(new String[] {"Are They easily spooked?","Yes","They can takie it"});
+		insert(newQuestion);
+end
+
+rule "time travel - yes"
+	when
+		question : Question(content == "In the modd for some time travel?", chosen == "Yes")
+	then
+		// result - Back to the future
+end
+
+rule "time travel - alternate worlds"
+	when
+		question : Question(content == "In the modd for some time travel?", chosen == "We prefer alternate worlds")
+	then
+		newQuestion = new Question(new String[] {"Do your kids like Looney Tunes?",
+    					"Yes", "Sure, but They'd like to see something different, too"});
+    	insert(newQuestion);
+end
+
+rule "time travel - chronological"
+	when
+		question : Question(content == "In the modd for some time travel?", chosen == "Only if it's chronological")
+	then
+		// result - forest gump
+end
+
+rule "sense of humor - side of values"
+	when
+		question : Question(content == "What's your family's sense of humor?", chosen == "Served with a side of values")
+	then
+		newQuestion = new Question(new String[] {"Macaulay Culkin: co-starring or headline?",
+    					"Supporting role", "Star of the show"});
+    	insert(newQuestion);
+end
+
+rule "sense of humor - dark"
+	when
+		question : Question(content == "What's your family's sense of humor?", chosen == "Dark")
+	then
+		newQuestion = new Question(new String[] {"The more bad jokes the better?", "Yes", "We'd like a bit of slapstick"});
+		insert(newQuestion);
+end
+
+rule "sense of humor - bright and cheery"
+	when
+		question : Question(content == "What's your family's sense of humor?", chosen == "Bright & cheery")
+	then
+		newQuestion = new Question(new String[] {"Do you speak squirrel?", "Yes", "We're still learning"});
+		insert(newQuestion);
+end
+
+rule "sport of choice - Football"
+	when
+		question : Question(content == "What's your sport of choice?", chosen == "Football")
+	then
+		newQuestion = new Question(new String[] {"Wants to take a 'feels' trip?", "Yes", "No, let's keep it light"});
+		insert(newQuestion);
+end
+
+rule "sport of choice - Hockey"
+	when
+		question : Question(content == "What's your sport of choice?", chosen == "Hockey")
+	then
+	    newQuestion = new Question(new String[] {"Interested in a true story?","Yes","Nope, just truly awesome"});
+		insert(newQuestion);
+end
+
+rule "sport of choice - Baseball"
+	when
+		question : Question(content == "What's your sport of choice?", chosen == "Baseball")
+	then
+		// znow chujowy diagram
+end
+
+rule "sport of choice - Basketball"
+	when
+		question : Question(content == "What's your sport of choice?", chosen == "Basketball")
+	then
+		newQuestion = new Question(new String[] {"Are there rules that say a dog can't play basketball?", "Yes", "No"});
+		insert(newQuestion);
+end
+
+rule "Pixar - No, Disney"
+	when
+		question : Question(content == "How about Pixar?", chosen == "No, Disney classic")
+	then
+		newQuestion = new Question(new String[] {"Would you like cute mice to save the day?", "Yes", "No"});
+		insert(newQuestion);
+end
+
+rule "Pixar - Yes"
+	when
+		question : Question(content == "How about Pixar?", chosen == "Yes")
+	then
+		newQuestion = new Question(new String[] {"Did Star Command send you on a mission?",
+    					"No, The old guy with balloons did", "Yes"});
+    	insert(newQuestion);
+end
+
+rule "Pixar - No, and not Disney"
+	when
+		question : Question(content == "How about Pixar?", chosen == "No, and not Disney either")
+	then
+		newQuestion = new Question(new String[] {"Would you enjoy a Don Bluth classic?","Yes","Double yes!"});
+		insert(newQuestion);
+end
+
+rule "sing over and over - a variety would be nice"
+	when
+		question : Question(content == "Do you enjoy hearing your kids sing the same song over and over?",
+			chosen = ="A little variety would be nice")
+	then
+		// result - alladin
+end
+
+rule "sing over and over - yes"
+	when
+		question : Question(content == "Do you enjoy hearing your kids sing the same song over and over?",
+			chosen == "Yes")
+	then
+		//result - Frozen
+end
+
+rule "hills alive - No"
+	when
+		question : Question(content == "Are the hills alive?", chosen == "No, but lions and scarecrows seem to be" )
+	then
+		// result - the wizard of oz
+end
+
+rule "hills alive - Yes"
+	when
+		question : Question(content == "Are the hills alive?", chosen == "Yes")
+	then
+		// result - the sound of music
+end
+
+rule "holidays - Halloween"
+	when
+		question : Question(content == "Is it the holidays?", chosen == "Halloween counts!")
+	then
+		// result - the nightmare before christmas
+end
+
+rule "holidays - Yes"
+	when
+		question : Question(content == "Is it the holidays?", chosen == "Yes")
+	then
+		// result - scrooge 
+end
+
+rule "crying - Yes"
+	when
+		question : Question(content == "Do you feel like crying?", chosen == "Yes")
+	then
+		//result - Turner & Hooch
+end
+
+rule "crying - only if happy ending"
+	when
+		question : Question(content == "Do you feel like crying?", chosen == "Only if it has a happy ending")
+	then
+		//result The lion king
+end
+
+rule "crying - only if at the beginning"
+	when
+		question : Question(content == "Do you feel like crying?",
+			chosen =="Only if It's at the beginning and I have plenty of time to recover")
+	then
+		// result - Bambi
+end
+
+rule "crying - No"
+	when
+		question : Question(content == "Do you feel like crying?", chosen == "No")
+	then
+		//result - Jumanji
+end
+
+rule "magic - Yes"
+	when
+		question : Question(content=="Do they like magic?", chosen == "Yes")
+	then
+		//result Harry Potter series
+end
+
+rule "magic - kinda"
+	when
+		question : Question(content=="Do they like magic?", chosen == "Kinda, but They want more action"))
+	then
+		// result - the lord of the rings series
+end
+
+rule "greatest ever made"
+	//zjebane
+	when
+	
+	then
+end
+
+rule "good dialogue - Yes"
+	when
+		question : Question(content=="Is good dialogue a must?", chosen== "Yes")
+	then
+		// result - e.t.
+end
+
+rule "good dialogue - No"
+	when
+		question : Question(content=="Is good dialogue a must?", chosen == "No")
+	then
+		// result - Fantasia  or other
+end
+
+rule "easily spooked - Yes"
+	when
+		question : Question(content == "Are They easily spooked?", chosen == "Yes")
+	then
+		// result - The goonies
+end
+
+rule "easily spooked - can take it"
+	when
+		question : Question(content == "Are They easily spooked?", chosen == "They can take it")
+	then
+		// result - Indiana Jones
+end
+
+rule "Looney Tunes - Yes"
+	when
+		question : Question(content == "Do your kids like Looney Tunes?", chosen == "Yes")
+	then
+		// result - who framed roger rabbit?
+end
+
+rule "Looney Tunes - somthing different"
+	when
+		question : Question(content == "Do your kids like Looney Tunes?",
+			chosen == "Sure, but They'd like to see something different, too")
+	then
+		// result - ferngully
+end
+
+rule "Macaulay - supporting"
+	when
+		question : Question(content == "Macaulay Culkin: co-starring or headline?", 
+			chosen == "Supporting role")
+	then
+		//result - uncle buck
+end
+
+rule "Macaulay - star"
+	when
+		question : Question(content == "Macaulay Culkin: co-starring or headline?", 
+			chosen == "Star of the show")
+	then
+		//result - home alone
+end
+
+rule "more bad jokes - yes"
+	when
+		question : Question(content == "The more bad jokes the better?", chosen == "Yes")
+	then
+		//result - The Addams family
+end
+
+rule "more bad jokes - No"
+	when
+		question : Question(content == "The more bad jokes the better?",
+			chosen == "We'd like a bit of slapstick")
+	then
+		//result - Ghostbusters
+end
+
+rule "squirrel - Yes"
+	when
+		question : Question(content == "Do you speak squirrel?", chosen =="Yes")
+	then
+		// result - the emperor's new groove
+end
+
+rule "squirrel - still learning"
+	when
+		question : Question(content == "Do you speak squirrel?", chosen == "We're still learning")
+	then
+		// result - Ice age
+end
+
+rule "'feels' trip - Yes"
+	when
+		question : Question(content == "Wants to take a 'feels' trip?", chosen == "Yes")
+	then
+		//result - Remember the titans
+end
+
+rule "'feels' trip - No"
+	when
+		question : Question(content == "Wants to take a 'feels' trip?", chosen == "No")
+	then
+		//result - Little giants
+end
+
+rule "true story - Yes"
+	when
+		question : Question(content == "Interested in a true story?", chosen == "Yes")
+	then
+		//result - Miracle
+end
+
+rule "true story - No"
+	when
+		question : Question(content == "Interested in a true story?", chosen == "Nope, just truly awesome")
+	then
+		// result - the might ducks
+end
+
+rule "dogs play basketball - Yes"
+	when
+		question : Question(content == "Are there rules that say a dog can't play basketball?",
+			chosen == "Yes")
+	then
+		//result - Hoosters
+end
+
+rule "dogs play basketball - No"
+	when
+		question : Question(content == "Are there rules that say a dog can't play basketball?",
+			chosen == "No")
+	then
+		//result - Air Bud
+end
+
+rule "cute mice - Yes"
+	when
+		question : Question(content == "Would you like cute mice to save the day?",
+			chosen == "Yes")
+	then
+	 	//result - The rescuers
+end
+
+rule "cute mice - No"
+	when
+		question : Question(content == "Would you like cute mice to save the day?",
+			chosen == "No")
+	then
+		//result - the beauty and the beast
+end
+
+rule "star command mission - No"
+	when
+		question : Question(content == "Did Star Command send you on a mission?",
+			chosen = "No, The old guy with balloons did")
+	then
+		//result - Up
+end
+
+rule "star command mission - Yes"
+	when
+		question : Question(content == "Did Star Command send you on a mission?",
+			chosen = "Yes")
+	then
+		//result - Toy Story
+end
+
+rule "Don Bluth - Yes"
+	when
+		question : Question(content == "Would you enjoy a Don Bluth classic?", chosen =="Yes")
+	then
+		// result - all dogs go to heaven
+end
+
+rule "Don Bluth - double Yes"
+	when
+		question : Question(content == "Would you enjoy a Don Bluth classic?", chosen =="Double yes!")
+	then
+		// result - The land before time
+end
+
+
+
+rule "Hello World"
+    when
+       
+    then
+    	
+    	//String pick = new String("Pick the next question:");
+    	
+    	
+    	
+
+    	
+    	
+    	
+    	
+    	
+    	//Question q12 = new Question(new String[] {"Is good dialogue a must?","Yes","No"});
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	insert(q1);
     	
     	
-        System.out.println( myMessage );
-        m.setMessage( "Goodbye cruel world" );
-        m.setStatus( Message.GOODBYE );
-        update( m );
-end
-
-rule "GoodBye"
-    when
-        Message( status == Message.GOODBYE, myMessage : message )
-    then
-        System.out.println( myMessage );
+        
 end
 
 rule "AskQuestion"
