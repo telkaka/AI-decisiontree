@@ -3,6 +3,8 @@ package com.sample
 
 import com.sample.DroolsTest.Question;
 
+
+// POZIOM DRZEWA 0
 rule "Init"
 	when
 	then
@@ -11,17 +13,21 @@ rule "Init"
     					"We have a soft spot for animation!", "We like to sing and dance!",
     					"We're animal lovers!", "We want to be wowed!"});
     	// zadaj pytanie
+    	question.Ask();
     	insert(question);
 end
 
+// POZIOM DRZEWA 1
 rule "type - adventure"
 	when
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "Take us on an adventure!")
 	then
-		newQuestion = new Question(new String[] {"Can they handle action scenes?","No","Yes"});
-		newQuestion2 = new Question(new String[] {"In the mood for some time travel?",
+		Question newQuestion = new Question(new String[] {"Can they handle action scenes?","No","Yes"});
+		Question newQuestion2 = new Question(new String[] {"In the mood for some time travel?",
     					"Yes","We prefer alternate worlds", "Only if It's chronogical"});
+    	newQuestion.Ask();
+    	newQuestion2.Ask();
 		insert(newQuestion);
 		insert(newQuestion2);
 end
@@ -31,8 +37,10 @@ rule "type - laugh"
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "We love to lough!")
 	then
-		newQuestion = new Question(new String[] {"What's your family's sense of humor?",
+		Question newQuestion = new Question(new String[] {"What's your family's sense of humor?",
 							"Served with a side of values","Dark","Bright & cheery"});
+		newQuestion.Ask();
+		insert(newQuestion);
 end
 
 rule "type - sports"
@@ -40,8 +48,10 @@ rule "type - sports"
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "We're big sports fans!")
 	then
-		newQuestion = new Question(new String[] {"What's your sport of choice?",
+		Question newQuestion = new Question(new String[] {"What's your sport of choice?",
 						"Football","Hockey","Baseball","Basketball"});
+		newQuestion.Ask();
+		insert(newQuestion);
 end
 
 rule "type - animation"
@@ -49,23 +59,24 @@ rule "type - animation"
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "We have a soft spot for animation!")
 	then
-		newQuestion = new Question(new String[] {"How about Pixar?",
+		Question newQuestion = new Question(new String[] {"How about Pixar?",
     					"No, Disney classic", "Yes", "No, and not Disney either"});
-    	newQuestion2 = new Question(new String[] {"Do you enjoy hearing your kids sing the same song over and over?",
+    	Question newQuestion2 = new Question(new String[] {"Do you enjoy hearing your kids sing the same song over and over?",
     					"A little variety would be nice","Yes"});
+    	newQuestion.Ask();
+    	newQuestion2.Ask();
     	insert(newQuestion);
     	insert(newQuestion2);
 end
 
 rule "type - dance"
 	when
-		question : Question(content == "What type of movie do they feel like watching?",
-							chosen == "We like to sing and dance!)
+		question : Question(content == "What type of movie do they feel like watching?",chosen == "We like to sing and dance!")
 	then
-		newQuestion = new Question(new String[] {"Are the hills alive?",
-    					"No, but lions and scarecrows seem to be", "Yes"});
-    	newQuestion2 = new Question(new String[] {"Is it the holidays?",
-    					"Halloween counts!","Yes"});
+		Question newQuestion = new Question(new String[] {"Are the hills alive?", "No, but lions and scarecrows seem to be", "Yes"});
+    	Question newQuestion2 = new Question(new String[] {"Is it the holidays?","Halloween counts!","Yes"});
+    	newQuestion.Ask();
+    	newQuestion2.Ask();
     	insert(newQuestion);
     	insert(newQuestion2);
 end
@@ -75,9 +86,10 @@ rule "type - animals"
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "We're animal lovers!")
 	then
-		newQuestion = new Question(new String[] {"Do you feel like crying?",
+		Question newQuestion = new Question(new String[] {"Do you feel like crying?",
 						"Yes", "Only if it has a happy ending",
     					"Only if It's at the beginning and I have plenty of time to recover", "No"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -86,11 +98,20 @@ rule "type - wow"
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "We want to be wowed!")
 	then
-		// tutaj jest pojebany diagram
-		newQuestion = new Question(new String[] {"Do They like magic?","Yes","Kinda, but They want more action"});
-    	newQuestion2 = new Question(new String[] {"I want to show them one of the greatest movies ever made","",""});
+		// uwaga zjebany diagram
+		Question newQuestion = new Question(new String[] {"Do They like magic?","Yes","Kinda, but They want more action"});
+    	Question newQuestion2 = new Question(new String[] {"I want to show them one of the greatest movies ever made","Yes","No"});
+  		Question newQuestion3 = new Question(new String[] {"I want to show them something great from my childhood","Yes","No"});
+    	newQuestion.Ask();
+    	newQuestion2.Ask();
+    	newQuestion3.Ask();
+    	insert(newQuestion);
+    	insert(newQuestion2);
+    	insert(newQuestion3);
 end
 
+
+// POZIOM DRZEWA 2
 rule "action - no"
 	when
 		question : Question(content == "Can they handle action scenes?", chosen == "No")
@@ -103,7 +124,8 @@ rule "action - yes"
 	when
 		question : Question(content == "Can they handle action scenes?", chosen == "Yes")
 	then
-		newQuestion = new Question(new String[] {"Are They easily spooked?","Yes","They can takie it"});
+		Question newQuestion = new Question(new String[] {"Are They easily spooked?","Yes","They can takie it"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -118,8 +140,9 @@ rule "time travel - alternate worlds"
 	when
 		question : Question(content == "In the modd for some time travel?", chosen == "We prefer alternate worlds")
 	then
-		newQuestion = new Question(new String[] {"Do your kids like Looney Tunes?",
+		Question newQuestion = new Question(new String[] {"Do your kids like Looney Tunes?",
     					"Yes", "Sure, but They'd like to see something different, too"});
+    	newQuestion.Ask();
     	insert(newQuestion);
 end
 
@@ -134,8 +157,9 @@ rule "sense of humor - side of values"
 	when
 		question : Question(content == "What's your family's sense of humor?", chosen == "Served with a side of values")
 	then
-		newQuestion = new Question(new String[] {"Macaulay Culkin: co-starring or headline?",
+		Question newQuestion = new Question(new String[] {"Macaulay Culkin: co-starring or headline?",
     					"Supporting role", "Star of the show"});
+    	newQuestion.Ask();
     	insert(newQuestion);
 end
 
@@ -143,7 +167,8 @@ rule "sense of humor - dark"
 	when
 		question : Question(content == "What's your family's sense of humor?", chosen == "Dark")
 	then
-		newQuestion = new Question(new String[] {"The more bad jokes the better?", "Yes", "We'd like a bit of slapstick"});
+		Question newQuestion = new Question(new String[] {"The more bad jokes the better?", "Yes", "We'd like a bit of slapstick"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -151,7 +176,8 @@ rule "sense of humor - bright and cheery"
 	when
 		question : Question(content == "What's your family's sense of humor?", chosen == "Bright & cheery")
 	then
-		newQuestion = new Question(new String[] {"Do you speak squirrel?", "Yes", "We're still learning"});
+		Question newQuestion = new Question(new String[] {"Do you speak squirrel?", "Yes", "We're still learning"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -159,7 +185,8 @@ rule "sport of choice - Football"
 	when
 		question : Question(content == "What's your sport of choice?", chosen == "Football")
 	then
-		newQuestion = new Question(new String[] {"Wants to take a 'feels' trip?", "Yes", "No, let's keep it light"});
+		Question newQuestion = new Question(new String[] {"Wants to take a 'feels' trip?", "Yes", "No, let's keep it light"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -167,7 +194,8 @@ rule "sport of choice - Hockey"
 	when
 		question : Question(content == "What's your sport of choice?", chosen == "Hockey")
 	then
-	    newQuestion = new Question(new String[] {"Interested in a true story?","Yes","Nope, just truly awesome"});
+	    Question newQuestion = new Question(new String[] {"Interested in a true story?","Yes","Nope, just truly awesome"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -176,13 +204,18 @@ rule "sport of choice - Baseball"
 		question : Question(content == "What's your sport of choice?", chosen == "Baseball")
 	then
 		// znow chujowy diagram
+		Question newQuestion = new Question (new String[] {"The Sandlot?", "Yes", "Wendy Peffercorn is a bit much"});
+		newQuestion.Ask();
+		insert(newQuestion);
+		
 end
 
 rule "sport of choice - Basketball"
 	when
 		question : Question(content == "What's your sport of choice?", chosen == "Basketball")
 	then
-		newQuestion = new Question(new String[] {"Are there rules that say a dog can't play basketball?", "Yes", "No"});
+		Question newQuestion = new Question(new String[] {"Are there rules that say a dog can't play basketball?", "Yes", "No"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -190,7 +223,8 @@ rule "Pixar - No, Disney"
 	when
 		question : Question(content == "How about Pixar?", chosen == "No, Disney classic")
 	then
-		newQuestion = new Question(new String[] {"Would you like cute mice to save the day?", "Yes", "No"});
+		Question newQuestion = new Question(new String[] {"Would you like cute mice to save the day?", "Yes", "No"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
@@ -198,8 +232,8 @@ rule "Pixar - Yes"
 	when
 		question : Question(content == "How about Pixar?", chosen == "Yes")
 	then
-		newQuestion = new Question(new String[] {"Did Star Command send you on a mission?",
-    					"No, The old guy with balloons did", "Yes"});
+		Question newQuestion = new Question(new String[] {"Did Star Command send you on a mission?","No, The old guy with balloons did", "Yes"});
+    	newQuestion.Ask();
     	insert(newQuestion);
 end
 
@@ -207,14 +241,14 @@ rule "Pixar - No, and not Disney"
 	when
 		question : Question(content == "How about Pixar?", chosen == "No, and not Disney either")
 	then
-		newQuestion = new Question(new String[] {"Would you enjoy a Don Bluth classic?","Yes","Double yes!"});
+		Question newQuestion = new Question(new String[] {"Would you enjoy a Don Bluth classic?","Yes","Double yes!"});
+		newQuestion.Ask();
 		insert(newQuestion);
 end
 
 rule "sing over and over - a variety would be nice"
 	when
-		question : Question(content == "Do you enjoy hearing your kids sing the same song over and over?",
-			chosen = ="A little variety would be nice")
+		question : Question(content == "Do you enjoy hearing your kids sing the same song over and over?", chosen =="A little variety would be nice")
 	then
 		// result - alladin
 end
@@ -293,31 +327,40 @@ end
 
 rule "magic - kinda"
 	when
-		question : Question(content=="Do they like magic?", chosen == "Kinda, but They want more action"))
+		question : Question(content == "Do they like magic?", chosen == "Kinda, but They want more action")
 	then
 		// result - the lord of the rings series
 end
 
-rule "greatest ever made"
-	//zjebane
+
+rule "greatest ever made - yes"
 	when
-	
+		question : Question(content == "I want to show them one of the greatest movies ever made",
+			chosen == "Yes")
 	then
+		//result - the princes bride
 end
 
-rule "good dialogue - Yes"
+rule "greatest ever made - no"
 	when
-		question : Question(content=="Is good dialogue a must?", chosen== "Yes")
+		question : Question(content == "I want to show them one of the greatest movies ever made",
+			chosen == "Ok, the greatest movie ever made")
 	then
-		// result - e.t.
+		//result - star wars episode 4: a new hope
 end
 
-rule "good dialogue - No"
+rule "childhood - yes"  // dla "no" koniec sciezki
 	when
-		question : Question(content=="Is good dialogue a must?", chosen == "No")
+		question : Question(content == "I want to show them something great from my childhood",
+			chosen == "Yes")
 	then
-		// result - Fantasia  or other
+		Question newQuestion = new Question(new String[] {"Is good dialogue a must?","Yes","No"});
+		newQuestion.Ask();
+		insert(newQuestion);
 end
+
+// POZIOM DRZEWA 3
+
 
 rule "easily spooked - Yes"
 	when
@@ -421,6 +464,23 @@ rule "true story - No"
 		// result - the might ducks
 end
 
+rule "the sandlot - Yes"
+	when
+		question : Question(content == "The Sandlot?", chosen == "Yes")
+	then
+		//result - the sandlot
+end
+
+rule "the sandlot - No"
+	when
+		question : Question(content == "The Sandlot?", chosen == "Wendy Peffercorn is a bit much")
+	then
+		// check this
+		Question newQuestion = new Question(new String[] {"Rookie of the year?", "Yes", "Now my kids are purposely slipping on baseballs"});
+		newQuestion.Ask();
+		insert(newQuestion);
+end
+
 rule "dogs play basketball - Yes"
 	when
 		question : Question(content == "Are there rules that say a dog can't play basketball?",
@@ -455,8 +515,7 @@ end
 
 rule "star command mission - No"
 	when
-		question : Question(content == "Did Star Command send you on a mission?",
-			chosen = "No, The old guy with balloons did")
+		question : Question(content == "Did Star Command send you on a mission?", chosen == "No, The old guy with balloons did")
 	then
 		//result - Up
 end
@@ -464,7 +523,7 @@ end
 rule "star command mission - Yes"
 	when
 		question : Question(content == "Did Star Command send you on a mission?",
-			chosen = "Yes")
+			chosen == "Yes")
 	then
 		//result - Toy Story
 end
@@ -483,41 +542,33 @@ rule "Don Bluth - double Yes"
 		// result - The land before time
 end
 
-
-
-rule "Hello World"
-    when
-       
-    then
-    	
-    	//String pick = new String("Pick the next question:");
-    	
-    	
-    	
-
-    	
-    	
-    	
-    	
-    	
-    	//Question q12 = new Question(new String[] {"Is good dialogue a must?","Yes","No"});
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	insert(q1);
-    	
-    	
-        
-end
-
-rule "AskQuestion"
+rule "good dialogue - Yes"
 	when
-		q : Question( status == Question.AVAILABLE)
+		question : Question(content=="Is good dialogue a must?", chosen== "Yes")
 	then
-		q.Ask();
+		// result - e.t.
 end
+
+rule "good dialogue - No"
+	when
+		question : Question(content=="Is good dialogue a must?", chosen == "No")
+	then
+		// result - Fantasia  or other
+end
+
+// POZIOM DRZEWA 4
+rule "rookie - Yes"
+	when
+		question : Question(content =="Rookie of the year?", chosen == "Yes")
+	then
+		//result - rookie of the year
+end
+
+rule "rookie - No"
+	when
+		question : Question(content =="Rookie of the year?", chosen == "Now my kids are purposely slipping on baseballs")
+	then
+		// result - Little big league
+end
+
+

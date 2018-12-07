@@ -44,7 +44,7 @@ public class DroolsTest {
     	
     	private String content;
     	private String[] answers;
-    	
+    	private String chosen;
 		private int status;
     	
     	public Question(String [] args) {
@@ -55,6 +55,7 @@ public class DroolsTest {
 	    		this.setContent(args[0]);
 	    		this.setAnswers(Arrays.copyOfRange(args, 1, args.length));
 	    		this.setStatus(UNAVAILABLE);
+	    		this.setChosen("");
     		}
     		catch(ArrayIndexOutOfBoundsException exception) {
     			LOGGER.log(Level.FINE, "Not enough arguments in Question()", exception);
@@ -70,6 +71,11 @@ public class DroolsTest {
     		for (int i=0;i< count ;i++) {
     			System.out.println(i+1 + ") " + answers[i]);
     		}
+    		System.out.println("wybrano: " + answers[0]);
+    		this.setChosen(answers[0]);
+    		
+    		
+    		
     	}
     	public String getContent() {
 			return content;
@@ -93,6 +99,14 @@ public class DroolsTest {
 
 		public void setStatus(int status) {
 			this.status = status;
+		}
+
+		public String getChosen() {
+			return chosen;
+		}
+
+		public void setChosen(String chosen) {
+			this.chosen = chosen;
 		}
 
     	
