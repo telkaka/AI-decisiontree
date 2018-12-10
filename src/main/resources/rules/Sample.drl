@@ -98,7 +98,6 @@ rule "type - wow"
 		question : Question(content == "What type of movie do they feel like watching?",
 							chosen == "We want to be wowed!")
 	then
-		// uwaga zjebany diagram
 		Question newQuestion = new Question(new String[] {"Do They like magic?","Yes","Kinda, but They want more action"});
     	Question newQuestion2 = new Question(new String[] {"I want to show them one of the greatest movies ever made","Yes","No"});
   		Question newQuestion3 = new Question(new String[] {"I want to show them something great from my childhood","Yes","No"});
@@ -116,7 +115,7 @@ rule "action - no"
 	when
 		question : Question(content == "Can they handle action scenes?", chosen == "No")
 	then
-		// result - Wall-E
+		question.setResult("Wall-E");
 		
 end
 
@@ -133,7 +132,7 @@ rule "time travel - yes"
 	when
 		question : Question(content == "In the modd for some time travel?", chosen == "Yes")
 	then
-		// result - Back to the future
+		question.setResult("Back to the future");
 end
 
 rule "time travel - alternate worlds"
@@ -149,8 +148,8 @@ end
 rule "time travel - chronological"
 	when
 		question : Question(content == "In the modd for some time travel?", chosen == "Only if it's chronological")
-	then
-		// result - forest gump
+	then 
+		question.setResult("forest gump");
 end
 
 rule "sense of humor - side of values"
@@ -203,7 +202,6 @@ rule "sport of choice - Baseball"
 	when
 		question : Question(content == "What's your sport of choice?", chosen == "Baseball")
 	then
-		// znow chujowy diagram
 		Question newQuestion = new Question (new String[] {"The Sandlot?", "Yes", "Wendy Peffercorn is a bit much"});
 		newQuestion.Ask();
 		insert(newQuestion);
@@ -250,7 +248,7 @@ rule "sing over and over - a variety would be nice"
 	when
 		question : Question(content == "Do you enjoy hearing your kids sing the same song over and over?", chosen =="A little variety would be nice")
 	then
-		// result - alladin
+		question.setResult("alladin");
 end
 
 rule "sing over and over - yes"
@@ -258,49 +256,51 @@ rule "sing over and over - yes"
 		question : Question(content == "Do you enjoy hearing your kids sing the same song over and over?",
 			chosen == "Yes")
 	then
-		//result - Frozen
+		question.setResult("Frozen");
 end
 
 rule "hills alive - No"
 	when
 		question : Question(content == "Are the hills alive?", chosen == "No, but lions and scarecrows seem to be" )
 	then
-		// result - the wizard of oz
+		question.setResult("the wizard of oz");
 end
 
 rule "hills alive - Yes"
 	when
 		question : Question(content == "Are the hills alive?", chosen == "Yes")
 	then
-		// result - the sound of music
+		question.setResult("the sound of music");
 end
 
 rule "holidays - Halloween"
 	when
 		question : Question(content == "Is it the holidays?", chosen == "Halloween counts!")
 	then
-		// result - the nightmare before christmas
+
+		question.setResult("the nightmare before christmas");
 end
 
 rule "holidays - Yes"
 	when
 		question : Question(content == "Is it the holidays?", chosen == "Yes")
 	then
-		// result - scrooge 
+
+		question.setResult("scrooge");
 end
 
 rule "crying - Yes"
 	when
 		question : Question(content == "Do you feel like crying?", chosen == "Yes")
-	then
-		//result - Turner & Hooch
+	then 
+		question.setResult("Turner & Hooch");
 end
 
 rule "crying - only if happy ending"
 	when
 		question : Question(content == "Do you feel like crying?", chosen == "Only if it has a happy ending")
 	then
-		//result The lion king
+		question.setResult("The lion king");
 end
 
 rule "crying - only if at the beginning"
@@ -308,28 +308,28 @@ rule "crying - only if at the beginning"
 		question : Question(content == "Do you feel like crying?",
 			chosen =="Only if It's at the beginning and I have plenty of time to recover")
 	then
-		// result - Bambi
+		question.setResult("Bambi");
 end
 
 rule "crying - No"
 	when
 		question : Question(content == "Do you feel like crying?", chosen == "No")
 	then
-		//result - Jumanji
+		question.setResult("Jumanji");
 end
 
 rule "magic - Yes"
 	when
 		question : Question(content=="Do they like magic?", chosen == "Yes")
 	then
-		//result Harry Potter series
+		question.setResult("Harry Potter series");
 end
 
 rule "magic - kinda"
 	when
 		question : Question(content == "Do they like magic?", chosen == "Kinda, but They want more action")
 	then
-		// result - the lord of the rings series
+		question.setResult("the lord of the rings series");
 end
 
 
@@ -338,7 +338,7 @@ rule "greatest ever made - yes"
 		question : Question(content == "I want to show them one of the greatest movies ever made",
 			chosen == "Yes")
 	then
-		//result - the princes bride
+		question.setResult("the princes bride");
 end
 
 rule "greatest ever made - no"
@@ -346,7 +346,7 @@ rule "greatest ever made - no"
 		question : Question(content == "I want to show them one of the greatest movies ever made",
 			chosen == "Ok, the greatest movie ever made")
 	then
-		//result - star wars episode 4: a new hope
+		question.setResult("star wars episode 4: a new hope");
 end
 
 rule "childhood - yes"  // dla "no" koniec sciezki
@@ -366,21 +366,21 @@ rule "easily spooked - Yes"
 	when
 		question : Question(content == "Are They easily spooked?", chosen == "Yes")
 	then
-		// result - The goonies
+		question.setResult("The goonies");
 end
 
 rule "easily spooked - can take it"
 	when
 		question : Question(content == "Are They easily spooked?", chosen == "They can take it")
 	then
-		// result - Indiana Jones
+		question.setResult("Indiana Jones");
 end
 
 rule "Looney Tunes - Yes"
 	when
 		question : Question(content == "Do your kids like Looney Tunes?", chosen == "Yes")
-	then
-		// result - who framed roger rabbit?
+	then 
+		question.setResult("who framed roger rabbit?");
 end
 
 rule "Looney Tunes - somthing different"
@@ -388,7 +388,7 @@ rule "Looney Tunes - somthing different"
 		question : Question(content == "Do your kids like Looney Tunes?",
 			chosen == "Sure, but They'd like to see something different, too")
 	then
-		// result - ferngully
+		question.setResult("ferngully");
 end
 
 rule "Macaulay - supporting"
@@ -396,7 +396,7 @@ rule "Macaulay - supporting"
 		question : Question(content == "Macaulay Culkin: co-starring or headline?", 
 			chosen == "Supporting role")
 	then
-		//result - uncle buck
+		question.setResult("uncle buck");
 end
 
 rule "Macaulay - star"
@@ -404,14 +404,14 @@ rule "Macaulay - star"
 		question : Question(content == "Macaulay Culkin: co-starring or headline?", 
 			chosen == "Star of the show")
 	then
-		//result - home alone
+		question.setResult("home alone");
 end
 
 rule "more bad jokes - yes"
 	when
 		question : Question(content == "The more bad jokes the better?", chosen == "Yes")
 	then
-		//result - The Addams family
+		question.setResult("The Addams family");
 end
 
 rule "more bad jokes - No"
@@ -419,56 +419,56 @@ rule "more bad jokes - No"
 		question : Question(content == "The more bad jokes the better?",
 			chosen == "We'd like a bit of slapstick")
 	then
-		//result - Ghostbusters
+		question.setResult("Ghostbusters");
 end
 
 rule "squirrel - Yes"
 	when
 		question : Question(content == "Do you speak squirrel?", chosen =="Yes")
 	then
-		// result - the emperor's new groove
+		question.setResult("the emperor's new groove");
 end
 
 rule "squirrel - still learning"
 	when
 		question : Question(content == "Do you speak squirrel?", chosen == "We're still learning")
 	then
-		// result - Ice age
+		question.setResult("Ice age");
 end
 
 rule "'feels' trip - Yes"
 	when
 		question : Question(content == "Wants to take a 'feels' trip?", chosen == "Yes")
 	then
-		//result - Remember the titans
+		question.setResult("Remember the titans");
 end
 
 rule "'feels' trip - No"
 	when
 		question : Question(content == "Wants to take a 'feels' trip?", chosen == "No")
 	then
-		//result - Little giants
+		question.setResult("Little giants");
 end
 
 rule "true story - Yes"
 	when
 		question : Question(content == "Interested in a true story?", chosen == "Yes")
 	then
-		//result - Miracle
+		question.setResult("Miracle");
 end
 
 rule "true story - No"
 	when
 		question : Question(content == "Interested in a true story?", chosen == "Nope, just truly awesome")
 	then
-		// result - the might ducks
+		question.setResult("the might ducks");
 end
 
 rule "the sandlot - Yes"
 	when
 		question : Question(content == "The Sandlot?", chosen == "Yes")
 	then
-		//result - the sandlot
+		question.setResult("the sandlot");
 end
 
 rule "the sandlot - No"
@@ -486,7 +486,7 @@ rule "dogs play basketball - Yes"
 		question : Question(content == "Are there rules that say a dog can't play basketball?",
 			chosen == "Yes")
 	then
-		//result - Hoosters
+		question.setResult("Hoosters");
 end
 
 rule "dogs play basketball - No"
@@ -494,7 +494,7 @@ rule "dogs play basketball - No"
 		question : Question(content == "Are there rules that say a dog can't play basketball?",
 			chosen == "No")
 	then
-		//result - Air Bud
+		question.setResult("Air Bud");
 end
 
 rule "cute mice - Yes"
@@ -502,7 +502,7 @@ rule "cute mice - Yes"
 		question : Question(content == "Would you like cute mice to save the day?",
 			chosen == "Yes")
 	then
-	 	//result - The rescuers
+	 	question.setResult("The rescuers");
 end
 
 rule "cute mice - No"
@@ -510,14 +510,14 @@ rule "cute mice - No"
 		question : Question(content == "Would you like cute mice to save the day?",
 			chosen == "No")
 	then
-		//result - the beauty and the beast
+		question.setResult("the beauty and the beast");
 end
 
 rule "star command mission - No"
 	when
 		question : Question(content == "Did Star Command send you on a mission?", chosen == "No, The old guy with balloons did")
 	then
-		//result - Up
+		question.setResult("Up");
 end
 
 rule "star command mission - Yes"
@@ -525,35 +525,35 @@ rule "star command mission - Yes"
 		question : Question(content == "Did Star Command send you on a mission?",
 			chosen == "Yes")
 	then
-		//result - Toy Story
+		question.setResult("Toy Story");
 end
 
 rule "Don Bluth - Yes"
 	when
 		question : Question(content == "Would you enjoy a Don Bluth classic?", chosen =="Yes")
 	then
-		// result - all dogs go to heaven
+		question.setResult("all dogs go to heaven");
 end
 
 rule "Don Bluth - double Yes"
 	when
 		question : Question(content == "Would you enjoy a Don Bluth classic?", chosen =="Double yes!")
 	then
-		// result - The land before time
+		question.setResult("The land before time");
 end
 
 rule "good dialogue - Yes"
 	when
 		question : Question(content=="Is good dialogue a must?", chosen== "Yes")
 	then
-		// result - e.t.
+		question.setResult("e.t.");
 end
 
 rule "good dialogue - No"
 	when
 		question : Question(content=="Is good dialogue a must?", chosen == "No")
 	then
-		// result - Fantasia  or other
+		question.setResult("Fantasia  or other");
 end
 
 // POZIOM DRZEWA 4
@@ -561,14 +561,14 @@ rule "rookie - Yes"
 	when
 		question : Question(content =="Rookie of the year?", chosen == "Yes")
 	then
-		//result - rookie of the year
+		question.setResult("rookie of the year");
 end
 
 rule "rookie - No"
 	when
 		question : Question(content =="Rookie of the year?", chosen == "Now my kids are purposely slipping on baseballs")
 	then
-		// result - Little big league
+		question.setResult("Little big league");
 end
 
 

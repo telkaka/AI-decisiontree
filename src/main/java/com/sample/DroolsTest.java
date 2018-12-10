@@ -11,16 +11,18 @@ import org.kie.api.runtime.KieSession;
  * This is a sample class to launch a rule.
  */
 public class DroolsTest {
-
+	
+	public static AIGui gui;
+	
     public static final void main(String[] args) {
         try {
             // load up the knowledge base
+        	gui = new AIGui();
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
-
-
-            kSession.fireAllRules();
+        	
+        	kSession.fireAllRules();
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -38,14 +40,13 @@ public class DroolsTest {
     	 
     	
     	private static final Logger LOGGER = Logger.getLogger( Question.class.getName() );
-    	public static final int UNAVAILABLE = 0;
-    	public static final int AVAILABLE = 1;
-    	public static final int ANSWERED = 2;
+
     	
     	private String content;
     	private String[] answers;
     	private String chosen;
-		private int status;
+		
+		
     	
     	public Question(String [] args) {
     		// todo 
@@ -54,8 +55,10 @@ public class DroolsTest {
     		try {
 	    		this.setContent(args[0]);
 	    		this.setAnswers(Arrays.copyOfRange(args, 1, args.length));
-	    		this.setStatus(UNAVAILABLE);
+	    		
 	    		this.setChosen("");
+	    		
+	    		
     		}
     		catch(ArrayIndexOutOfBoundsException exception) {
     			LOGGER.log(Level.FINE, "Not enough arguments in Question()", exception);
@@ -65,17 +68,13 @@ public class DroolsTest {
     	public void Ask() {
     		// todo
     		// request answer from input, print the pick and change state
-    		System.out.println(this.getContent());
-    		String [] answers = this.getAnswers();
-    		int count = answers.length;
-    		for (int i=0;i< count ;i++) {
-    			System.out.println(i+1 + ") " + answers[i]);
-    		}
-    		System.out.println("wybrano: " + answers[0]);
-    		this.setChosen(answers[0]);
+    		int pickIndex = gui.showQuestion(this);
+    		this.setChosen(this.getAnswers()[pickIndex]);
     		
     		
-    		
+    	}
+    	public void setResult(String movieName) {
+    		gui.addMovie(movieName);
     	}
     	public String getContent() {
 			return content;
@@ -92,15 +91,6 @@ public class DroolsTest {
 		public void setAnswers(String[] answers) {
 			this.answers = answers;
 		}
-
-		public int getStatus() {
-			return status;
-		}
-
-		public void setStatus(int status) {
-			this.status = status;
-		}
-
 		public String getChosen() {
 			return chosen;
 		}
