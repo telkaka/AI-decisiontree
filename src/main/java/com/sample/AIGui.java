@@ -97,6 +97,8 @@ public class AIGui extends JFrame implements ActionListener
 		this.question = q.getContent();
 		this.answers = q.getAnswers();
 		this.nextButton.setEnabled(false);
+		this.nextButton.setText("Next");
+		this.next = false;
 		this.group = new ButtonGroup();
 		for (int i=0; i<this.answers.length ;i++) {
 			radioButtons[i] = new JRadioButton(this.answers[i]);
@@ -126,7 +128,7 @@ public class AIGui extends JFrame implements ActionListener
 	}
 	public int showResult(String movieName) {
 		this.panel.removeAll();
-		Label result = new Label("The result is: \n" + movieName);
+		Label result = new Label("The result is: " + movieName);
 		this.panel.add(result);
 		this.nextButton.setEnabled(true);
 		this.next = false;

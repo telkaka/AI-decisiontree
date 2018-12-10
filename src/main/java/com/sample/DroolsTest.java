@@ -53,9 +53,6 @@ public class DroolsTest {
 		
     	
     	public Question(String [] args) {
-    		// todo 
-    		// set status
-    		
     		this.setChosen("");
     		try {
 	    		this.setContent(args[0]);
@@ -68,16 +65,15 @@ public class DroolsTest {
     	}
     	
     	public void Ask() {
-    		// todo
-//    		 request answer from input, print the pick and change state
+    		// request input from user
+    		System.out.println("asking question: " + this.content);
     		int pickIndex = gui.showQuestion(this);
-    		
     		this.setChosen(this.getAnswers()[pickIndex]);
-    		
+    		System.out.println("response: " + this.getAnswers()[pickIndex]);
     		
     	}
     	public void setResult(String movieName) {
-    		movies = movies + movieName + "\n";
+    		System.out.println("result movie: " + movieName);
     		gui.showResult(movieName);		
     	}
     	
