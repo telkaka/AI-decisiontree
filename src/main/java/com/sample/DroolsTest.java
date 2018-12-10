@@ -48,7 +48,7 @@ public class DroolsTest {
     	private String chosen;
 
 
-		public static String movies="";
+		public String movies="";
 		
 		
     	
@@ -78,11 +78,9 @@ public class DroolsTest {
     	}
     	public void setResult(String movieName) {
     		movies = movies + movieName + "\n";
-    		System.out.println(movies);
-    		gui.showResult(movieName);
-    		
-    		
+    		gui.showResult(movieName);		
     	}
+    	
     	public String getContent() {
 			return content;
 		}

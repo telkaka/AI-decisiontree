@@ -13,6 +13,7 @@ import javax.swing.JRadioButton;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -68,7 +69,7 @@ public class AIGui extends JFrame implements ActionListener
 		this.frame.setSize(600, 600);
 		this.frame.setResizable(false);
 		this.panel = new JPanel();
-		this.panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		this.panel.setLayout(new GridLayout(0,1));
 		this.frame.add(panel);
 		this.frame.setVisible(true);
 		
@@ -84,6 +85,7 @@ public class AIGui extends JFrame implements ActionListener
 		for (int i=0; i<this.answers.length ;i++) {
 			this.panel.add(radioButtons[i]);
 		}
+		
 		this.panel.add(this.nextButton);
 		this.panel.revalidate();
 		this.panel.repaint();
@@ -124,10 +126,11 @@ public class AIGui extends JFrame implements ActionListener
 	}
 	public int showResult(String movieName) {
 		this.panel.removeAll();
-		Label result = new Label("the result is: \n" + movieName);
+		Label result = new Label("The result is: \n" + movieName);
 		this.panel.add(result);
 		this.nextButton.setEnabled(true);
 		this.next = false;
+		nextButton.setText("See next result");
 		this.panel.add(nextButton);
 		this.panel.revalidate();
 		this.panel.repaint();
