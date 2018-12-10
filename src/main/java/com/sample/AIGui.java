@@ -49,34 +49,26 @@ public class AIGui extends JFrame implements ActionListener
 	private boolean next;
 	private String question;
 	private String [] answers;
-	private List<String> movies;
-	private Label [] movieLabels;
-	private Label gowno;
 	
 	public AIGui ()
 	{
 		//TODO
 		//layout
-		//wyświetlanie odpowiedzi zawartych w this.movies
 		//wrunek  stopu
 		
 		
-		this.movies = new ArrayList<String>();
 		this.radioButtons = new JRadioButton[8];
 		this.next = false;
 		this.frame = new JFrame("Family Movie Flowchart");
 		this.questionLabel = new Label("question here");
 		this.questionLabel.setMaximumSize(new Dimension(10000,50));
 		this.nextButton = new JButton("Next");
-		this.movieLabels = new Label[8];
-		
 		
 		
 		this.frame.setSize(600, 600);
 		this.frame.setResizable(false);
 		this.panel = new JPanel();
 		this.panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		
 		this.frame.add(panel);
 		this.frame.setVisible(true);
 		
@@ -86,40 +78,13 @@ public class AIGui extends JFrame implements ActionListener
 	{
 		this.panel.removeAll();
 
-		this.group = new ButtonGroup();
-
 		this.questionLabel.setText(this.question);
-		this.nextButton.setEnabled(false);
-		
 		this.panel.add(this.questionLabel);
 		
 		for (int i=0; i<this.answers.length ;i++) {
-			radioButtons[i] = new JRadioButton(this.answers[i]);
-			radioButtons[i].addActionListener(x->{this.nextButton.setEnabled(true);});
-			radioButtons[i].setActionCommand(Integer.toString(i));
-			this.group.add(radioButtons[i]);
 			this.panel.add(radioButtons[i]);
 		}
-		
-		/*if (!this.movies.isEmpty())
-		{
-			for (int i = 0; i < this.movies.size(); i++)
-			{
-				this.movieLabels[i] = new Label(this.movies.get(i));
-				this.movieLabels[i].setText(this.movies.get(i));
-				this.panel.add(movieLabels[i]);
-			}
-		}*/
-		
-		if(!this.movies.isEmpty())
-		{
-			System.out.println("gowno");
-		}
-		
-		
-		this.nextButton.addActionListener(x -> {this.next = true;});
 		this.panel.add(this.nextButton);
-		
 		this.panel.revalidate();
 		this.panel.repaint();
 		
@@ -129,7 +94,18 @@ public class AIGui extends JFrame implements ActionListener
 	{
 		this.question = q.getContent();
 		this.answers = q.getAnswers();
+		this.nextButton.setEnabled(false);
+		this.group = new ButtonGroup();
+		for (int i=0; i<this.answers.length ;i++) {
+			radioButtons[i] = new JRadioButton(this.answers[i]);
+			radioButtons[i].addActionListener(x->{this.nextButton.setEnabled(true);});
+			radioButtons[i].setActionCommand(Integer.toString(i));
+			this.group.add(radioButtons[i]);
+		}
+		
+		this.nextButton.addActionListener(x -> {this.next = true;});
 		this.present();
+		
 		while (true) {
 			
 			if (this.next) 
@@ -146,21 +122,32 @@ public class AIGui extends JFrame implements ActionListener
 			}
 		}
 	}
-	
-	public void addMovie(String movieName) 
-	{
-		this.movies.add(movieName);
+	public int showResult(String movieName) {
+		this.panel.removeAll();
+		Label result = new Label("the result is: \n" + movieName);
+		this.panel.add(result);
+		this.nextButton.setEnabled(true);
+		this.next = false;
+		this.panel.add(nextButton);
+		this.panel.revalidate();
+		this.panel.repaint();
+		
+		while (true){
+			if(this.next) {
+				return 0;
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 	}
 	
-	/*public void showMovie(List<String> movies)
-	{
-		this.present();
-		for (int i = 0; i < this.movies.size(); i++)
-		{
-			movieLabels[i] = new Label(this.movies.get(i));
-			this.panel.add(movieLabels[i]);
-		}
-	}*/
+	
 	
 	public void actionPerformed(ActionEvent e)
 	{
@@ -185,6 +172,10 @@ public class AIGui extends JFrame implements ActionListener
 			}
 		});
 	}
+
+	
+
+	
 
 
 

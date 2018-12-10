@@ -123,7 +123,7 @@ rule "action - yes"
 	when
 		question : Question(content == "Can they handle action scenes?", chosen == "Yes")
 	then
-		Question newQuestion = new Question(new String[] {"Are They easily spooked?","Yes","They can takie it"});
+		Question newQuestion = new Question(new String[] {"Are They easily spooked?","Yes","They can take it"});
 		newQuestion.Ask();
 		insert(newQuestion);
 end
@@ -570,5 +570,4 @@ rule "rookie - No"
 	then
 		question.setResult("Little big league");
 end
-
 

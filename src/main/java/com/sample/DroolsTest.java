@@ -23,6 +23,7 @@ public class DroolsTest {
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
         	
         	kSession.fireAllRules();
+        	
         } catch (Throwable t) {
             t.printStackTrace();
         }
@@ -45,6 +46,9 @@ public class DroolsTest {
     	private String content;
     	private String[] answers;
     	private String chosen;
+
+
+		public static String movies="";
 		
 		
     	
@@ -52,12 +56,10 @@ public class DroolsTest {
     		// todo 
     		// set status
     		
+    		this.setChosen("");
     		try {
 	    		this.setContent(args[0]);
 	    		this.setAnswers(Arrays.copyOfRange(args, 1, args.length));
-	    		
-	    		this.setChosen("");
-	    		
 	    		
     		}
     		catch(ArrayIndexOutOfBoundsException exception) {
@@ -67,14 +69,19 @@ public class DroolsTest {
     	
     	public void Ask() {
     		// todo
-    		// request answer from input, print the pick and change state
+//    		 request answer from input, print the pick and change state
     		int pickIndex = gui.showQuestion(this);
+    		
     		this.setChosen(this.getAnswers()[pickIndex]);
     		
     		
     	}
     	public void setResult(String movieName) {
-    		gui.addMovie(movieName);
+    		movies = movies + movieName + "\n";
+    		System.out.println(movies);
+    		gui.showResult(movieName);
+    		
+    		
     	}
     	public String getContent() {
 			return content;
