@@ -50,6 +50,8 @@ public class AIGui extends JFrame implements ActionListener
 	private String question;
 	private String [] answers;
 	private List<String> movies;
+	private Label [] movieLabels;
+	private Label gowno;
 	
 	public AIGui ()
 	{
@@ -66,6 +68,9 @@ public class AIGui extends JFrame implements ActionListener
 		this.questionLabel = new Label("question here");
 		this.questionLabel.setMaximumSize(new Dimension(10000,50));
 		this.nextButton = new JButton("Next");
+		this.movieLabels = new Label[8];
+		
+		
 		
 		this.frame.setSize(600, 600);
 		this.frame.setResizable(false);
@@ -76,7 +81,9 @@ public class AIGui extends JFrame implements ActionListener
 		this.frame.setVisible(true);
 		
 	}
-	public void present() {
+	
+	public void present() 
+	{
 		this.panel.removeAll();
 
 		this.group = new ButtonGroup();
@@ -85,12 +92,28 @@ public class AIGui extends JFrame implements ActionListener
 		this.nextButton.setEnabled(false);
 		
 		this.panel.add(this.questionLabel);
+		
 		for (int i=0; i<this.answers.length ;i++) {
 			radioButtons[i] = new JRadioButton(this.answers[i]);
 			radioButtons[i].addActionListener(x->{this.nextButton.setEnabled(true);});
 			radioButtons[i].setActionCommand(Integer.toString(i));
 			this.group.add(radioButtons[i]);
 			this.panel.add(radioButtons[i]);
+		}
+		
+		/*if (!this.movies.isEmpty())
+		{
+			for (int i = 0; i < this.movies.size(); i++)
+			{
+				this.movieLabels[i] = new Label(this.movies.get(i));
+				this.movieLabels[i].setText(this.movies.get(i));
+				this.panel.add(movieLabels[i]);
+			}
+		}*/
+		
+		if(!this.movies.isEmpty())
+		{
+			System.out.println("gowno");
 		}
 		
 		
@@ -101,13 +124,16 @@ public class AIGui extends JFrame implements ActionListener
 		this.panel.repaint();
 		
 	}
-	public int showQuestion(Question q) {
+	
+	public int showQuestion(Question q)
+	{
 		this.question = q.getContent();
 		this.answers = q.getAnswers();
 		this.present();
 		while (true) {
 			
-			if (this.next) {
+			if (this.next) 
+			{
 				// zwraca indeks wybranej odpowiedzi
 				this.next = false;
 				return Integer.parseInt(this.group.getSelection().getActionCommand());
@@ -119,13 +145,23 @@ public class AIGui extends JFrame implements ActionListener
 				e.printStackTrace();
 			}
 		}
-		
-		
 	}
 	
-	public void addMovie(String movieName) {
+	public void addMovie(String movieName) 
+	{
 		this.movies.add(movieName);
 	}
+	
+	/*public void showMovie(List<String> movies)
+	{
+		this.present();
+		for (int i = 0; i < this.movies.size(); i++)
+		{
+			movieLabels[i] = new Label(this.movies.get(i));
+			this.panel.add(movieLabels[i]);
+		}
+	}*/
+	
 	public void actionPerformed(ActionEvent e)
 	{
 //		Object e_source = e.getSource();
