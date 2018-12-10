@@ -1,7 +1,7 @@
 package com.sample
  
 
-import com.sample.DroolsTest.Question;
+import moviePicker.MoviePicker.Question;
 //
 //	71 reguł zapisanych w kolejności przechodzenia wszerz dla porządku i kontroli nad kodem
 //	Użytkownik może dostać odpowiedź w postaci jednego lub więcej filmów

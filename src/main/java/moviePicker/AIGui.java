@@ -1,41 +1,19 @@
-package com.sample;
+package moviePicker;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Label;
-
-import javax.swing.JToggleButton;
-import javax.swing.JSeparator;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import com.sample.DroolsTest.Question;
-
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import moviePicker.MoviePicker.Question;
 
 
 
@@ -53,14 +31,11 @@ public class AIGui extends JFrame implements ActionListener
 	
 	public AIGui ()
 	{
-		//TODO
-		//layout
-		//wrunek  stopu
-		
-		
+
 		this.radioButtons = new JRadioButton[8];
 		this.next = false;
 		this.frame = new JFrame("Family Movie Flowchart");
+		this.frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.questionLabel = new Label("question here");
 		this.questionLabel.setMaximumSize(new Dimension(10000,50));
 		this.nextButton = new JButton("Next");
@@ -121,7 +96,6 @@ public class AIGui extends JFrame implements ActionListener
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -144,7 +118,6 @@ public class AIGui extends JFrame implements ActionListener
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -153,35 +126,7 @@ public class AIGui extends JFrame implements ActionListener
 	}
 	
 	
-	
 	public void actionPerformed(ActionEvent e)
 	{
-//		Object e_source = e.getSource();
-//		if (e_source == this.nextButton)
-//		{
-//			
-//			this.panel.revalidate();
-//			this.panel.repaint();
-//			
-//		}
 	}
-
-
-	public static void main(String[] args) 
-	{
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			@Override
-			public void run() {
-				new AIGui();
-			}
-		});
-	}
-
-	
-
-	
-
-
-
 }

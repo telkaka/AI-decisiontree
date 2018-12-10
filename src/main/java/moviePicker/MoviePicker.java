@@ -1,4 +1,4 @@
-package com.sample;
+package moviePicker;
 
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -7,17 +7,15 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-/**
- * This is a sample class to launch a rule.
- */
-public class DroolsTest {
+public class MoviePicker {
 	
 	public static AIGui gui;
 	
     public static final void main(String[] args) {
         try {
-            // load up the knowledge base
+            
         	gui = new AIGui();
+        	
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
         	KieSession kSession = kContainer.newKieSession("ksession-rules");
@@ -29,29 +27,17 @@ public class DroolsTest {
         }
     }
 
-
     public static class Question{
-    	/** TODO
-    	 * 
-    	 * use STATES for questions
-    	 * define actions after question is answered
-    	 * make an question-example to get rid of message example
-    	 * 
-		 */
-    	 
     	
+    	 
     	private static final Logger LOGGER = Logger.getLogger( Question.class.getName() );
 
     	
-    	private String content;
-    	private String[] answers;
-    	private String chosen;
+    	private String content; // pytanie
+    	private String[] answers; // odpowiedzi
+    	private String chosen; // odpowiedz wybrana przez uzytkownika
 
-
-		public String movies="";
 		
-		
-    	
     	public Question(String [] args) {
     		this.setChosen("");
     		try {
@@ -99,7 +85,6 @@ public class DroolsTest {
 		public void setChosen(String chosen) {
 			this.chosen = chosen;
 		}
-
     	
     }
 
